@@ -9,10 +9,34 @@ public class Main {
     static String[] commodities = {"Gold", "Oil", "Silver", "Wheat", "Copper"};
     static String[] months = {"January","February","March","April","May","June",
                               "July","August","September","October","November","December"};
-    
 
+    static int[][][] profit = new int[MONTHS][DAYS][COMMS];
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+        try {
+            for (int m = 0; m < MONTHS; m++) {
+                String filename = "Data_Files/" + months[m] + ".txt";
+                Scanner scanner = new Scanner(new File(filename));
+
+                scanner.nextLine();
+
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] parts = line.split(",");
+
+                    int day = Integer.parseInt(parts[0]) - 1;
+                    String commodity = parts[1];
+                    int profitValue = Integer.parseInt(parts[2]);
+
+                    int commIndex = getCommodityIndex(commodity);
+                    profit[m][day][commIndex] = profitValue;
+                }
+
+                scanner.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
