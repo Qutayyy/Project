@@ -61,4 +61,13 @@ public class Main {
         loadData();
         System.out.println("Data loaded – ready for queries");
     }
+
+    public static int getCommodityIndex(String name) {
+        for (int i = 0; i < commodities.length; i++) {
+            if (commodities[i].equals(name)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
