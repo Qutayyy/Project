@@ -208,8 +208,31 @@ public class Main {
         return maxSwing;
     }
     
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
+    public static String compareTwoCommodities(String c1, String c2) {
+        int c1Index = getCommodityIndex(c1);
+        int c2Index = getCommodityIndex(c2);
+
+        if (c1Index == -1 || c2Index == -1) {
+            return "INVALID_COMMODITY";
+        }
+
+        int c1Total = 0;
+        int c2Total = 0;
+
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 0; d < DAYS; d++) {
+                c1Total += profit[m][d][c1Index];
+                c2Total += profit[m][d][c2Index];
+            }
+        }
+
+        if (c1Total > c2Total) {
+            return c1 + " is better by " + (c1Total - c2Total);
+        } else if (c2Total > c1Total) {
+            return c2 + " is better by " + (c2Total - c1Total);
+        } else {
+            return "Equal";
+        }
     }
     
     public static String bestWeekOfMonth(int month) { 
