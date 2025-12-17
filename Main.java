@@ -137,8 +137,29 @@ public class Main {
         return months[bestMonth];
     }
 
-    public static int consecutiveLossDays(String comm) { 
-        return 1234; 
+    public static int consecutiveLossDays(String comm) {
+        int commIndex = getCommodityIndex(comm);
+
+        if (commIndex == -1) {
+            return -1;
+        }
+        int maxStreak = 0;
+        int currentStreak = 0;
+
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 0; d < DAYS; d++) {
+                if (profit[m][d][commIndex] < 0) {
+                    currentStreak++;
+                    if (currentStreak > maxStreak) {
+                        maxStreak = currentStreak;
+                    }
+                } else {
+                    currentStreak = 0;
+                }
+            }
+        }
+
+        return maxStreak;
     }
     
     public static int daysAboveThreshold(String comm, int threshold) { 
