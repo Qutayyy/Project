@@ -162,7 +162,7 @@ public class Main {
         return maxStreak;
     }
     
-    public static int daysAboveThreshold(String comm, int threshold) { 
+    public static int daysAboveThreshold(String comm, int threshold) {
         int commIndex = getCommodityIndex(comm);
 
         if (commIndex == -1) {
@@ -182,8 +182,30 @@ public class Main {
         return count;
     }
 
-    public static int biggestDailySwing(int month) { 
-        return 1234; 
+    public static int biggestDailySwing(int month) {
+        if (month < 0 || month >= MONTHS) {
+            return -99999;
+        }
+
+        int maxSwing = 0;
+
+        for (int d = 0; d < DAYS - 1; d++) {
+            int day1Total = 0;
+            int day2Total = 0;
+
+            for (int c = 0; c < COMMS; c++) {
+                day1Total += profit[month][d][c];
+                day2Total += profit[month][d + 1][c];
+            }
+
+            int swing = Math.abs(day2Total - day1Total);
+
+            if (swing > maxSwing) {
+                maxSwing = swing;
+            }
+        }
+
+        return maxSwing;
     }
     
     public static String compareTwoCommodities(String c1, String c2) { 
