@@ -163,7 +163,23 @@ public class Main {
     }
     
     public static int daysAboveThreshold(String comm, int threshold) { 
-        return 1234; 
+        int commIndex = getCommodityIndex(comm);
+
+        if (commIndex == -1) {
+            return -1;
+        }
+
+        int count = 0;
+
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 0; d < DAYS; d++) {
+                if (profit[m][d][commIndex] > threshold) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 
     public static int biggestDailySwing(int month) { 
