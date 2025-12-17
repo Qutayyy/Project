@@ -73,7 +73,20 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        int commIndex = getCommodityIndex(commodity);
+
+        if (commIndex == -1 || from < 1 || to > DAYS || from > to) {
+            return -99999;
+        }
+
+        int totalProfit = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = from - 1; d < to; d++) { 
+                totalProfit += profit[m][d][commIndex];
+            }
+        }
+
+        return totalProfit;
     }
 
     public static int bestDayOfMonth(int month) { 
