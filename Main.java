@@ -67,7 +67,7 @@ public class Main {
         }
         int total = 0;
         for (int c = 0; c < COMMS; c++) {
-            total += profit[month][day][c];
+            total += profit[month][day - 1][c];
         }
         return total;
     }
